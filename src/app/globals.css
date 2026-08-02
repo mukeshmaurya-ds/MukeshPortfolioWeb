@@ -1,26 +1,217 @@
 @import "tailwindcss";
 
+/* =========================================
+   Theme Variables
+========================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds */
+  --background: #ffffff; /* main page background */
+  --background-secondary: #f9fafb; /* secondary sections */
+  --background-tertiary: #f3f4f6; /* tertiary sections */
+
+  /* Foreground */
+  --foreground: #111827; /* dark text for readability */
+
+  /* Cards */
+  --card: #ffffff; /* card background */
+  --card-foreground: #111827; /* card text */
+
+  /* Borders */
+  --border: #d1d5db; /* subtle borders */
+
+  /* Muted */
+  --muted: #6b7280; /* muted text */
+  --muted-foreground: #4b5563; /* lighter muted */
+
+  /* Primary */
+  --primary: #2563eb; /* keep primary blue */
+  --primary-foreground: #ffffff;
+
+  /* Secondary */
+  --secondary: #eff6ff; /* light blue background */
+  --secondary-foreground: #1e3a8a;
+
+  /* Accent */
+  --accent: #f3f4f6; /* neutral accent */
+  --accent-foreground: #111827;
+
+  /* Ring */
+  --ring: #3b82f6;
+
+  /* Border Radius */
+  --radius: 0.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  /* Backgrounds */
+  --background: #111827; /* dark gray for main background */
+  --background-secondary: #1f2937; /* darker secondary */
+  --background-tertiary: #27272a; /* tertiary */
+
+  /* Foreground */
+  --foreground: #f9fafb; /* light text */
+
+  /* Cards */
+  --card: #1f2937; /* card background */
+  --card-foreground: #f9fafb; /* card text */
+
+  /* Borders */
+  --border: #374151; /* border color */
+
+  /* Muted */
+  --muted: #9ca3af; /* muted text */
+  --muted-foreground: #d1d5db; /* lighter muted */
+
+  /* Primary */
+  --primary: #3b82f6; /* keep primary blue */
+  --primary-foreground: #ffffff;
+
+  /* Secondary */
+  --secondary: #1e293b; /* dark secondary */
+  --secondary-foreground: #dbeafe;
+
+  /* Accent */
+  --accent: #111827; /* neutral accent */
+  --accent-foreground: #f9fafb;
+
+  /* Ring */
+  --ring: #60a5fa;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =========================================
+   Base Styles
+========================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+  transition:
+    background-color 250ms ease,
+    color 250ms ease;
+}
+
+/* =========================================
+   Text Selection
+========================================= */
+
+::selection {
+  background: rgb(37 99 235 / 25%);
+  color: inherit;
+}
+
+/* =========================================
+   Scrollbar
+========================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--foreground) 35%, transparent);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--foreground) 50%, transparent);
+}
+
+/* =========================================
+   Layout
+========================================= */
+
+.container-custom {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-custom {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-custom {
+    padding-inline: 2rem;
+  }
+}
+
+/* =========================================
+   Reusable Theme Utilities
+========================================= */
+
+.surface {
+  background: var(--background-secondary);
+  border: 1px solid var(--border);
+}
+
+.surface-muted {
+  background: var(--background-tertiary);
+  border: 1px solid var(--border);
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.text-secondary {
+  color: var(--muted-foreground);
+}
+
+.border-theme {
+  border-color: var(--border);
+}
+
+.bg-theme {
+  background: var(--background);
+}
+
+.bg-theme-secondary {
+  background: var(--background-secondary);
+}
+
+.bg-theme-muted {
+  background: var(--background-tertiary);
+}
+
+.text-theme {
+  color: var(--foreground);
+}
+
+.card-theme {
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+}
+
+.shadow-theme {
+  box-shadow:
+    0 4px 20px rgb(15 23 42 / 0.05),
+    0 2px 8px rgb(15 23 42 / 0.04);
+}
+
+.dark .shadow-theme {
+  box-shadow:
+    0 8px 30px rgb(0 0 0 / 0.35),
+    0 2px 10px rgb(0 0 0 / 0.2);
 }
